@@ -1,4 +1,4 @@
-# SwiftLaTeX (Actively developing)
+# SwiftLaTeX (At alpha stage! Developers are working hard on it.)
 
 ## One-liner introduction for SwiftLaTeX
 
@@ -21,7 +21,7 @@ SwiftLaTeX, a WYSIWYG WebAssembly-powered LaTeX Editor.
 ## Great, I wanna have a try!
 Try it in https://v2.swiftlatex.com
 
-Or host it by yourself using docker-compose
+Or host it by yourself using docker-compose, the docker file has a few bugs on IP setting. We will fix it asap.
 
 ```
 git clone https://github.com/SwiftLaTeX/SwiftLaTeX
@@ -42,17 +42,14 @@ You may find the following source file useful as it showcases how to use these A
 
 The engine is not a faithful reimplementation of XeTeX. First, it does not support Chinese/Japanese/Korea/Arabic languages. Supporting these languages require a fully working ICU library, whose size may be unbearable. Secondly, the engine uses browsers' APIs to handle image files. 
 Due to API limitation (or my laziness), our engine does not support multi-page PDF images yet. 
-If you want to include a multi-page PDF images in your document, consider extracting the page you want to include and save it as an independent file first. (Todo, more details) 
+If you want to include a multi-page PDF images in your document, consider extracting the page you want to include and save it as an independent file first. 
 
-Currently, we have no plan to release the source code. Nevertheless, our team is happy to grant permission for you or your organization to use the binary for non-commercial purposes (e.g., individual or tertiary education). 
+You can find the engine source code in https://github.com/SwiftLaTeX/JavascriptTeX. 
+It is a work-in-progress repo, but contains necessary Makefile to build the webassembly binary.
 If you need more tech support on the engine or want to submit a feature request, you can contact g.weber(at)auckland.ac.nz.
 
 ### Live Viewer
-The live viewer converts the output of the Engine (DVI format) to HTML, so it can be displayed in a browser more efficiently (rather than relying on PDF.js). 
-You may find the following two files useful.
-1. DVI parser (https://github.com/SwiftLaTeX/IDE/blob/master/packages/latex/src/browser/xdv-parser.ts).
-2. HTML generator (https://github.com/SwiftLaTeX/IDE/blob/master/packages/latex/src/browser/xdv-machine.ts)
-
+Our engine now directly outputs HTML files, which can be directly rendered in browsers.
 The generated HTMLs contains synchronization information (similar to SyncTeX), which is the mapping from the HTML element to the source code position. The information has a character-grained accuracy, which then allows us to implement WYSIWYG editing on the viewer.
 
 However, SwiftLaTeX is a quick evolving project and the viewer may consist of a small number of bugs. We are currently working hard on the following issues. We expect to fix them in the next few weeks.
